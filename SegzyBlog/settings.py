@@ -15,8 +15,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-EMAIL_HOST_USER='adebayoogunniyi8@gmail.com'
-EMAIL_HOST_PASSWORD='uwtmynpmiexdkyjy'
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +27,7 @@ SECRET_KEY = 'django-insecure-0xcx)w1x%3!)qloiuq(+9zu-@4r)y4iwtz&cyy2bva17s3%yg#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
