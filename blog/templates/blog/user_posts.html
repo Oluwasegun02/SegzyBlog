@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Posts by {{ user.username }}{% endblock %}
+
+{% block content %}
+
+<div class="bg-white p-6 rounded-lg shadow-lg">
+  <h1 class="text-3xl font-bold mb-6">Posts by {{ user.username }}</h1>
+    {% for post in posts %}
+        <div class="p-6 bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold">{{ post.title }}</h2>
+            <div class="mt-6 text-gray-600">{{ post.safe_content|safe|slice:":200" }}...</div>
+            <p class="mt-2 text-sm text-gray-500">Written on {{ post.created_at|date:"F j, Y" }}</p>
+            
+        </div>
+    {% empty %}
+        <p>You have not written any blog posts yet.</p>
+    {% endfor %}
+    <button type="submit" class="bg-blue-500 text-white py-2 mx-2 mt-4 px-4 rounded-lg" > <a href="{% url 'create_post' %}">Create Now</a></button>
+</div>
+{% endblock %}

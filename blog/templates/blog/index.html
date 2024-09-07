@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - My Blog{% endblock %}
+
+{% block content %}
+<!-- Blog Posts Section -->
+<div class="bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6">Latest Blog Posts</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for post in page_obj %}
+        <div class="p-6 bg-gray-50 rounded-lg shadow">
+            <h2 class="text-2xl font-bold mb-2">
+                <a href="{% url 'post_detail' post.id post.slug %}" class="text-blue-500">{{ post.title }}</a>
+            </h2>
+            <p class="text-sm text-gray-500">Written by {{ post.author }} on {{ post.created_at|date:"F j, Y" }}</p>
+            <div class="mt-6">{{ post.safe_content|safe|slice:":202" }} ...</div>
+            <a href="{% url 'post_detail' post.id post.slug %}" class="text-blue-500 mt-4 block">Read More</a>
+        </div>
+        {% empty %}
+        <p>No blog posts available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Pagination Controls -->
+<div class="mt-6 flex justify-between">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}" class="text-blue-500">Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" class="text-blue-500">Next</a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<!-- Sidebar Section -->
+<h2 class="text-2xl font-bold mb-4">Categories</h2>
+<ul>
+    {% for category in categories %}
+    <li class="mb-2">
+        <a href="{% url 'posts_by_category' category.id %}" class="text-blue-500 hover:underline">{{ category.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2 class="text-2xl font-bold mt-6 mb-4">Tags</h2>
+<ul>
+    {% for tag in tags %}
+    <li class="mb-2">
+        <a href="{% url 'posts_by_tag' tag.id %}" class="text-blue-500 hover:underline">#{{ tag.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

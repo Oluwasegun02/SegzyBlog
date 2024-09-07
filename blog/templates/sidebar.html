@@ -1,0 +1,26 @@
+<aside class="w-full md:w-1/4 bg-gray-100 p-4 md:p-6 border-t md:border-t-0 md:border-l md:border-gray-300 rounded-lg shadow-lg h-full overflow-y-auto">
+    <!-- Categories Section -->
+    <h2 class="text-2xl font-bold mb-4">Categories</h2>
+    <ul>
+        {% for category in categories|slice:":10" %}  <!-- Display a maximum of 10 categories -->
+            <li class="mb-2">
+                <a href="{% url 'posts_by_category' category.id %}" class="text-blue-500 hover:underline">{{ category.name }}</a>
+            </li>
+        {% empty %}
+        <li>No categories available</li>
+        {% endfor %}
+    </ul>
+  
+    <!-- Tags Section -->
+    <h2 class="text-2xl font-bold mt-6 mb-4">Tags</h2>
+    <ul>
+        {% for tag in tags|slice:":10" %}  <!-- Display a maximum of 10 tags -->
+            <li class="mb-2">
+                <a href="{% url 'posts_by_tag' tag.id %}" class="text-blue-500 hover:underline">#{{ tag.name }}</a>
+            </li>
+        {% empty %}
+        <li>No tags available</li>
+        {% endfor %}
+    </ul>
+  </aside>
+  
