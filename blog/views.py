@@ -10,6 +10,11 @@ import smtplib
 from email.mime.text import MIMEText
 from jinja2 import Template
 import os
+from dotenv import load_dotenv
+load_dotenv()
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
 
 # Create your views here.
 
@@ -60,7 +65,7 @@ def contact_page(request):
             # Send email
             try:
                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-                    server.login('adebayoogunniyi8@gmail.com', 'uwtmynpmiexdkyjy')  # Use App Password
+                    server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)  # Use App Password
                     server.sendmail(email, 'adebayoogunniyi8@gmail.com', msg.as_string())
                 messages.success(request, 'Your message has been sent successfully!')
             except Exception as e:
