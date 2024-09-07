@@ -10,4 +10,9 @@
           "dest": "SegzyBlog/wsgi.py"
       }
   ]
+  "functions": {
+      "api/*.js": {
+        "runtime": "nodejs14.x"
+      }
+  }
 }
