@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100 py-10">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-3xl font-bold mb-6 text-center">Login</h2>
+      <form method="POST">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700">Username</label>
+            <p class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">{{ form.username }}</p>
+            
+        </div>
+          <div class="mb-4">
+              <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700">Password</label>
+              <p class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">{{ form.password }}</p>
+          </div>
+          <button type="submit" class="w-full bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Login</button>
+      </form>
+  </div>
+</div>
+{% endblock %}
