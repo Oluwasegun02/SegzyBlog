@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
-import dj_database_url
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-0xcx)w1x%3!)qloiuq(+9zu-@4r)y4iwtz&cyy2bva17s3%yg#')
+SECRET_KEY =  os.getenv('SECRET_KEY', 'django-insecure-0xcx)w1x%3!)qloiuq(+9zu-@4r)y4iwtz&cyy2bva17s3%yg#')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,7 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'tailwind', 
     'accounts',
-    'ckeditor',
+    'ckeditor_5',
     'ckeditor_uploader',
 ]
 
@@ -84,13 +82,8 @@ WSGI_APPLICATION = 'SegzyBlog.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}',
-        conn_max_age=600,
-        ssl_require=True  # Enable SSL for secure connection to the database in production
-    )
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -125,11 +118,10 @@ USE_TZ = True
 
 # CKEditor settings
 CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_CONFIGS = {
+CKEDITOR_5_CONFIGS = {
     'default': {
-        'toolbar': 'full',
+        'toolbar': 'basic',
         'height': 300,
-        'width': 'auto',
     },
 }
 
