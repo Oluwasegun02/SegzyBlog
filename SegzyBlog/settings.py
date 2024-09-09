@@ -152,3 +152,10 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PORT = os.getenv("PORT", 8000)
+
+# Then use it in your run command
+if __name__ == "__main__":
+    from django.core.management import execute_from_command_line
+    execute_from_command_line([sys.argv[0], 'runserver', '0.0.0.0:' + PORT])
