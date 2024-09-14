@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SegzyBlog.wsgi.application'
+ASGI_APPLICATION = 'SegzyBlog.asgi.application'
 
 
 # Database
