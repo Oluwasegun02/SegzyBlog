@@ -83,7 +83,7 @@ ASGI_APPLICATION = 'SegzyBlog.asgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
+        default='postgresql://db_8mzm_user:Qdz78o6KAwTlsoAvtYbupyQAoBF8BASr@dpg-crgb6ctsvqrc73f0rtvg-a/db_8mzm',
         conn_max_age=600,
         conn_health_checks=True,
     )
