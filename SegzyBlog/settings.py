@@ -83,9 +83,9 @@ ASGI_APPLICATION = 'SegzyBlog.asgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://db_8mzm_user:Qdz78o6KAwTlsoAvtYbupyQAoBF8BASr@dpg-crgb6ctsvqrc73f0rtvg-a/db_8mzm',
+        default=f'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}',
         conn_max_age=600,
-        conn_health_checks=True,
+        ssl_require=True  # Enable SSL for secure connection to the database in production
     )
 }
 
