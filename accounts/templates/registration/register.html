@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-3xl font-bold mb-6 text-center">Register</h2>
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            
+            <!-- Display the form fields directly -->
+            <div class="flex flex-col space-y-2">
+                <label for="{{ form.username.id_for_label }}" class="font-semibold">Username</label>
+                <p class="w-full p-1 border border-gray-300 rounded mb-4">{{ form.username }}</p>
+                
+            </div>
+            <div class="flex flex-col space-y-2">
+                <label for="{{ form.email.id_for_label }}" class="font-semibold">Email</label>
+                <p class="w-full p-1 border border-gray-300 rounded mb-4">{{ form.email }}</p>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <label for="{{ form.password1.id_for_label }}" class="font-semibold">Password</label>
+                <p class="w-full p-1 border border-gray-300 rounded mb-4">{{ form.password1 }}</p>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <label for="{{ form.password2.id_for_label }}" class="font-semibold">Confirm Password</label>
+                <p class="w-full p-1 border border-gray-300 rounded mb-4">{{ form.password2 }}</p>
+            </div>
+            
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Register</button>
+        </form>
+        <p class="text-center mt-4">
+            Already have an account? <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
