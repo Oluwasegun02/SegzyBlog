@@ -133,10 +133,10 @@ This project is deployed live using **Render**. Follow these steps for successfu
 ## 📸 Screenshots
 
 ### Home Page
-![SegzyBlog Home Page](https://via.placeholder.com/1200x600?text=SegzyBlog+Home+Page)
+[SegzyBlog Home Page](https://via.placeholder.com/1200x600?text=SegzyBlog+Home+Page)
 
 ### Blog Post View
-![SegzyBlog Post Page](https://via.placeholder.com/1200x600?text=SegzyBlog+Post+View)
+[SegzyBlog Post Page](https://via.placeholder.com/1200x600?text=SegzyBlog+Post+View)
 
 ---
 
@@ -165,7 +165,7 @@ Contributions are welcome to make SegzyBlog better! Follow these steps to contri
 
 Developed by **[Oluwasegun Ogunniyi]**, a passionate Django developer committed to creating robust and user-friendly applications. 
 
-Connect with me on LinkedIn: [Your LinkedIn Profile]([https://linkedin.com/your-profile](https://www.linkedin.com/in/oluwasegun-ogunniyi-286874234))
+Connect with me on LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/oluwasegun-ogunniyi-286874234)
 
 ---
 
