@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Create New Post{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6">Create a New Post</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Create Post</button>
+        <button type="submit" class="bg-blue-500 text-white py-2 mx-10 mt-10 px-4 rounded-lg" > <a href="{% url 'user_posts' %}">Views My Posts</a></button>
+    </form>
+</div>
+{% endblock %}

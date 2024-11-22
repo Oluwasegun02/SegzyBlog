@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <link href="{% static 'css/tailwind.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center py-4">
+            <div class="flex items-rigth justify-between w-full md:w-auto">
+                <div class="text-3xl font-bold">
+                    <a href="{% url 'index' %}" class="text-white">My Blog</a>
+                </div>
+                <!-- Mobile menu button -->
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav id="menu"
+                class="w-full md:w-auto mt-4 md:mt-0 flex flex-col md:flex-row items-rigth space-y-4 md:space-y-0 md:space-x-6 md:justify-center md:items-center">
+
+                {% if request.user.is_authenticated %}
+                <span class="text-white">Welcome, {{ request.user.username }}</span>
+                <a href="{% url 'index' %}" class="text-white hover:underline">Home</a>
+                <a href="{% url 'about_page' %}" class="text-white hover:underline">About</a>
+                <a href="{% url 'contact_page' %}" class="text-white hover:underline">Contact</a>
+                <a href="{% url 'create_post' %}" class="text-white hover:underline">Create Post</a>
+                <a href="{% url 'profile' %}">
+                    <img class="w-10 h-10 rounded-full" src="{{ user.profile.profile_picture.url }}"
+                        alt="Profile Picture">
+                </a>
+                <a href="{% url 'logout' %}" class="text-white hover:underline">Logout</a>
+                {% else %}
+                <a href="{% url 'index' %}" class="text-white hover:underline">Home</a>
+                <a href="{% url 'about_page' %}" class="text-white hover:underline">About</a>
+                <a href="{% url 'contact_page' %}" class="text-white hover:underline">Contact</a>
+                <a href="{% url 'login' %}" class="text-white hover:underline">Login</a>
+                <a href="{% url 'register' %}" class="text-white hover:underline">Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <form action="{% url 'search_results' %}" method="get" class="flex items-center justify-center">
+        <input type="text" name="q" placeholder="Search..." class="p-2 border border-gray-300 rounded-l-lg ">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg">Search</button>
+    </form>
+
+    <!-- Main Content -->
+    <div class="flex flex-col md:flex-row">
+        <main class="flex-1 py-6 px-4 md:px-6 bg-white">
+            {% block content %}
+            <!-- Main content goes here -->
+            {% endblock %}
+        </main>
+
+        <!-- Sidebar -->
+        {% include 'sidebar.html' %}
+    </div>
+    <!-- Sidebar Section -->
+
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-4 mt-10">
+        <div class="container mx-auto text-center">
+            <p>&copy; {{ current_year }} 2024 My Blog. All rights reserved.</p>
+            <nav class="space-x-6 mt-4">
+                <a href="{% url 'index' %}" class="text-white hover:underline">Home</a>
+                <a href="{% url 'about_page' %}" class="text-white hover:underline">About</a>
+                <a href="{% url 'contact_page' %}" class="text-white hover:underline">Contact</a>
+                <a href="{% url 'create_post' %}" class="hover:underline">Create Post</a>
+                <a href="{% url 'privacy_policy' %}" class="text-white hover:underline">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+    <!-- javaScript  -->
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            var menu = document.getElementById('menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+    <!-- Optional JS -->
+    {% block extra_js %}{% endblock %}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"></script>
+</body>
+
+</html>

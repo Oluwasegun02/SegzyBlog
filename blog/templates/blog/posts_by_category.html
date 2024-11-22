@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Posts in Category: {{ category.name }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-10">
+    <h2 class="text-3xl font-bold mb-6">Posts in {{ category.name }}</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for post in posts %}
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold"><a href="{% url 'post_detail' post.id post.slug %}" class="text-blue-500 hover:underline">{{ post.title }}</a></h2>
+                <div class="mt-6 text-gray-600">{{ post.safe_content|safe|slice:":200" }}...</div>
+                <p class="mt-2 text-sm text-gray-500">Written by {{ post.author }} on {{ post.created_at|date:"F j, Y" }}</p>
+            </div>
+        {% empty %}
+            <p>No blog posts in this category.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

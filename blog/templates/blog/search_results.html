@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6">Search Results for "{{ query }}"</h1>
+    <ul>
+        {% for post in results %}
+            <li class="mb-4">
+                <a href="{% url 'post_detail' post.id post.slug %}" class="text-blue-500 hover:underline">{{ post.title }}</a>
+                <div class="mt-6">{{ post.safe_content|safe|slice:":202" }} ...</div>
+                
+            </li>
+        {% empty %}
+            <li>No results found for your query.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

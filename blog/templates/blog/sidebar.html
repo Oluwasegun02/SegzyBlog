@@ -1,0 +1,21 @@
+sidebar <!-- Sidebar Section -->
+<aside class="w-full md:w-1/4 bg-gray-100 p-4 md:p-6 border-t md:border-t-0 md:border-l md:border-gray-300 rounded-lg shadow-lg">
+    
+    <h2 class="text-2xl font-bold mb-4">Categories</h2>
+    <ul>
+        {% for category in categories %}
+        <li class="mb-2">
+            <a href="{% url 'posts_by_category' category.id %}" class="text-blue-500 hover:underline">{{ category.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-6 mb-4">Tags</h2>
+    <ul>
+        {% for tag in tags %}
+        <li class="mb-2">
+            <a href="{% url 'posts_by_tag' tag.id %}" class="text-blue-500 hover:underline">#{{ tag.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</aside>
