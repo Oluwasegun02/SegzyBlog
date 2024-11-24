@@ -5,20 +5,57 @@
 {% block content %}
 <div class="flex items-center justify-center min-h-screen bg-gray-100 py-10">
   <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-      <h2 class="text-3xl font-bold mb-6 text-center">Login</h2>
-      <form method="POST">
-          {% csrf_token %}
-          <div class="mb-4">
-            <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700">Username</label>
-            <p class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">{{ form.username }}</p>
-            
+    <h2 class="text-3xl font-bold mb-6 text-center">Login</h2>
+    <form method="POST">
+      {% csrf_token %}
+      
+      <!-- Display Non-Field Errors -->
+      {% if form.non_field_errors %}
+        <div class="bg-red-100 text-red-700 p-2 rounded-md mb-4">
+          <ul>
+            {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
         </div>
-          <div class="mb-4">
-              <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700">Password</label>
-              <p class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">{{ form.password }}</p>
+      {% endif %}
+      
+      <!-- Username Field -->
+      <div class="mb-4">
+        <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700">Username</label>
+        <input type="text" name="username" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" value="{{ form.username.value|default:'' }}">
+        
+        {% if form.username.errors %}
+          <div class="text-red-600 text-sm mt-1">
+            {% for error in form.username.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
           </div>
-          <button type="submit" class="w-full bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Login</button>
-      </form>
+        {% endif %}
+      </div>
+      
+      <!-- Password Field -->
+      <div class="mb-4">
+        <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" name="password" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+        
+        {% if form.password.errors %}
+          <div class="text-red-600 text-sm mt-1">
+            {% for error in form.password.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Submit Button -->
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Login</button>
+    </form>
+    <!-- Register Link -->
+    <p class="text-center mt-4">
+      Don't have an account? <a href="{% url 'register' %}" class="text-blue-500 hover:underline">Register</a>
+  </p>
   </div>
 </div>
+
 {% endblock %}
