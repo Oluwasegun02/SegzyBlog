@@ -9,30 +9,82 @@
         <form method="POST" class="space-y-4">
             {% csrf_token %}
             
-            <!-- Display the form fields directly -->
+            <!-- Non-field errors -->
+            {% if form.non_field_errors %}
+                <div class="bg-red-100 text-red-700 p-2 rounded mb-4">
+                    <ul>
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <!-- Username Field -->
             <div class="flex flex-col space-y-2">
                 <label for="{{ form.username.id_for_label }}" class="font-semibold">Username</label>
-                <p class="w-full p-1 border border-gray-300 rounded mb-4">{{ form.username }}</p>
+                <input type="text" name="username" class="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" value="{{ form.username.value|default:'' }}">
                 
-            </div>
-            <div class="flex flex-col space-y-2">
-                <label for="{{ form.email.id_for_label }}" class="font-semibold">Email</label>
-                <p class="w-full p-1 border border-gray-300 rounded mb-4">{{ form.email }}</p>
-            </div>
-            <div class="flex flex-col space-y-2">
-                <label for="{{ form.password1.id_for_label }}" class="font-semibold">Password</label>
-                <p class="w-full p-1 border border-gray-300 rounded mb-4">{{ form.password1 }}</p>
-            </div>
-            <div class="flex flex-col space-y-2">
-                <label for="{{ form.password2.id_for_label }}" class="font-semibold">Confirm Password</label>
-                <p class="w-full p-1 border border-gray-300 rounded mb-4">{{ form.password2 }}</p>
+                {% if form.username.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
             
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Register</button>
+            <!-- Email Field -->
+            <div class="flex flex-col space-y-2">
+                <label for="{{ form.email.id_for_label }}" class="font-semibold">Email</label>
+                <input type="email" name="email" class="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" value="{{ form.email.value|default:'' }}">
+                
+                {% if form.email.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Password Field -->
+            <div class="flex flex-col space-y-2">
+                <label for="{{ form.password1.id_for_label }}" class="font-semibold">Password</label>
+                <input type="password" name="password1" class="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500">
+                
+                {% if form.password1.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Confirm Password Field -->
+            <div class="flex flex-col space-y-2">
+                <label for="{{ form.password2.id_for_label }}" class="font-semibold">Confirm Password</label>
+                <input type="password" name="password2" class="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500">
+                
+                {% if form.password2.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-800 transition">Register</button>
         </form>
+        
+        <!-- Login Link -->
         <p class="text-center mt-4">
             Already have an account? <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login</a>
         </p>
     </div>
 </div>
+
 {% endblock %}
